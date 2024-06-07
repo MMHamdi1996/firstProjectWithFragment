@@ -10,5 +10,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.goldButton.setOnClickListener {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(binding.fragmentContainerView.id, GoldFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+        binding.dollarButton.setOnClickListener {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(binding.fragmentContainerView.id, DollarFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 }
