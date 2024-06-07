@@ -13,12 +13,21 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //راست چین
-        binding.tabLayout.getTabAt(1)
+        binding.tabLayout.getTabAt(1)?.select()
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                Toast.makeText(this@MainActivity, "" + tab?.position, Toast.LENGTH_SHORT).show()
+                if (tab?.position == 0) {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(binding.fragmentContainerView.id, DollarFragment())
+                        .commit()
+                } else if (tab?.position == 1) {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(binding.fragmentContainerView.id, GoldFragment())
+                        .commit()
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
