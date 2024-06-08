@@ -1,8 +1,8 @@
-package com.example.nerkhearzapp
+package com.example.nerkhearzapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.nerkhearzapp.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 
@@ -15,24 +15,25 @@ class MainActivity : AppCompatActivity() {
 
         binding.tabLayout.getTabAt(1)?.select()
 
+
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                if (tab?.position == 0) {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(binding.fragmentContainerView.id, DollarFragment())
-                        .commit()
-                } else if (tab?.position == 1) {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(binding.fragmentContainerView.id, GoldFragment())
-                        .commit()
-                }
+                binding.viewPager.currentItem = tab!!.position
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
 
+        })
+
+        binding.viewPager.adapter = ViewPagerAdapter(this)
+        binding.viewPager.currentItem = 1
+
+        binding.viewPager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                binding.tabLayout.getTabAt(position)?.select()
+            }
         })
     }
 }

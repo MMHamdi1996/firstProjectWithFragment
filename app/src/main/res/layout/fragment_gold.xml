@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFD600"
-    tools:context=".GoldFragment">
+    tools:context=".view.GoldFragment">
 
 
     <TextView
