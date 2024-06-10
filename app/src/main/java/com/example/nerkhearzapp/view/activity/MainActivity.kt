@@ -1,9 +1,10 @@
-package com.example.nerkhearzapp.view
+package com.example.nerkhearzapp.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.nerkhearzapp.databinding.ActivityMainBinding
+import com.example.nerkhearzapp.view.adapter.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
