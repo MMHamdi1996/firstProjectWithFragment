@@ -1,6 +1,7 @@
 package com.example.nerkhearzapp.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -34,10 +35,8 @@ class DollarFragment : Fragment() {
         val apiService : ApiService = retrofit.create(ApiService::class.java)
         val call = apiService.getData()
         call.enqueue(object : Callback<MutableList<DataClass>>{
-            override fun onResponse(
-                p0: Call<MutableList<DataClass>>,
-                p1: Response<MutableList<DataClass>>,
-            ) {
+            override fun onResponse(call: Call<MutableList<DataClass>>, response: Response<MutableList<DataClass>>) {
+                Log.d("DataResponse" , "" + response.body())
             }
 
             override fun onFailure(p0: Call<MutableList<DataClass>>, p1: Throwable) {
