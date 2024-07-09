@@ -34,20 +34,15 @@ class DollarFragment : Fragment() {
 
         val apiService : ApiService = retrofit.create(ApiService::class.java)
         val call = apiService.getData()
-        call.enqueue(object : Callback<MutableList<DataClass>>{
-            override fun onResponse(call: Call<MutableList<DataClass>>, response: Response<MutableList<DataClass>>) {
-                Log.d("DataResponse" , "" + response.body())
+        call.enqueue(object : Callback<String>{
+            override fun onResponse(p0: Call<String>, p1: Response<String>) {
+                Log.d("dataE" , "" + p1.body())
             }
 
-            override fun onFailure(p0: Call<MutableList<DataClass>>, p1: Throwable) {
+            override fun onFailure(p0: Call<String>, p1: Throwable) {
+                Log.d("dataE" , "" + p1.message)
             }
-
         })
-
-
-        val list = mutableListOf("Ali", "Mahdi", "Hasan")
-        binding.DollarFragmentRecyclerView.layoutManager = LinearLayoutManager(activity)
-        binding.DollarFragmentRecyclerView.adapter = MyAdapter(requireContext(), list)
 
 
         return binding.root

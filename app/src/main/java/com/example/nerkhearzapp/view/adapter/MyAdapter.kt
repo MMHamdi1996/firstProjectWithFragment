@@ -7,24 +7,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.nerkhearzapp.databinding.RecyclerLayoutBinding
+import com.example.nerkhearzapp.view.DataClass
 import com.example.nerkhearzapp.view.activity.MainActivity
 
 
-class MyAdapter(var context: Context , val list: MutableList<String>) :
+class MyAdapter(val list: MutableList<DataClass>?) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(val binding: RecyclerLayoutBinding) : ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        MyViewHolder(RecyclerLayoutBinding.inflate(LayoutInflater.from(context), parent, false))
+        MyViewHolder(RecyclerLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
 
     override fun getItemCount(): Int {
-        return list.size
+        return 5
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding.textView.text = list[position]
+        holder.binding.textView.text = list?.get(position)?.title
     }
 
 }

@@ -6,5 +6,5 @@ import retrofit2.http.GET
 interface ApiService {
 
     @GET("test.json")
-    fun getData() : Call<MutableList<DataClass>>
+    fun getData() : Call<String>
 }
