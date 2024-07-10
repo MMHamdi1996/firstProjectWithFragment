@@ -12,6 +12,7 @@ import com.example.nerkhearzapp.databinding.FragmentDollarBinding
 import com.example.nerkhearzapp.view.ApiService
 import com.example.nerkhearzapp.view.DataClass
 import com.example.nerkhearzapp.view.adapter.MyAdapter
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,7 +39,11 @@ class DollarFragment : Fragment() {
         val call = apiService.getData()
         call.enqueue(object : Callback<String>{
             override fun onResponse(p0: Call<String>, p1: Response<String>) {
-                Log.d("dataE" , "" + p1.body())
+
+                val jsonObject = JSONObject(p1.body())
+                val jsonObject2 = jsonObject.getJSONObject("sana")
+                val jsonArray = jsonObject2.getJSONArray("data")
+                Log.d("dataZ" , "" + jsonArray[0])
             }
 
             override fun onFailure(p0: Call<String>, p1: Throwable) {
