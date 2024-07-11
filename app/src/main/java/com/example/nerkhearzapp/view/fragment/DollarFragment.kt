@@ -35,19 +35,27 @@ class DollarFragment : Fragment() {
             .baseUrl("https://sharifmehr.com/")
             .build()
 
-        val apiService : ApiService = retrofit.create(ApiService::class.java)
+        val apiService: ApiService = retrofit.create(ApiService::class.java)
         val call = apiService.getData()
-        call.enqueue(object : Callback<String>{
+        call.enqueue(object : Callback<String> {
             override fun onResponse(p0: Call<String>, p1: Response<String>) {
 
                 val jsonObject = JSONObject(p1.body())
                 val jsonObject2 = jsonObject.getJSONObject("sana")
                 val jsonArray = jsonObject2.getJSONArray("data")
-                Log.d("dataZ" , "" + jsonArray[0])
+
+                val titleList = mutableListOf<String>()
+                val priceList = mutableListOf<String>()
+                for (i in 0 until jsonArray.length()) {
+                    titleList.add(jsonArray.getJSONObject(i).get("title").toString())
+                    priceList.add(jsonArray.getJSONObject(i).get("p").toString())
+                }
+                binding.DollarFragmentRecyclerView.adapter = MyAdapter(titleList, priceList)
+                binding.DollarFragmentRecyclerView.layoutManager = LinearLayoutManager(activity)
             }
 
             override fun onFailure(p0: Call<String>, p1: Throwable) {
-                Log.d("dataE" , "" + p1.message)
+                Log.d("dataE", "" + p1.message)
             }
         })
 

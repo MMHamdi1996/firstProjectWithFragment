@@ -11,7 +11,7 @@ import com.example.nerkhearzapp.view.DataClass
 import com.example.nerkhearzapp.view.activity.MainActivity
 
 
-class MyAdapter(val list: MutableList<DataClass>?) :
+class MyAdapter(val titleList: MutableList<String> ,val priceList: MutableList<String>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(val binding: RecyclerLayoutBinding) : ViewHolder(binding.root)
@@ -21,11 +21,12 @@ class MyAdapter(val list: MutableList<DataClass>?) :
 
 
     override fun getItemCount(): Int {
-        return 5
+        return titleList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding.textView.text = list?.get(position)?.title
+        holder.binding.titleTextView.text = titleList[position]
+        holder.binding.priceTextView.text = priceList[position]
     }
 
 }
